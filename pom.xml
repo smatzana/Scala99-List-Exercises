@@ -9,6 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <scala-library.version>2.12.0</scala-library.version>
         <jvm.version>1.8</jvm.version>
     </properties>
