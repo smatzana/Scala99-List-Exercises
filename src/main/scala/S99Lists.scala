@@ -1,7 +1,4 @@
-package com.matzanas.S99
-
 import scala.annotation.tailrec
-
 
 object P01 {
   /*
