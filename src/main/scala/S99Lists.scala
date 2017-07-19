@@ -11,7 +11,7 @@ object P01 {
     aList match {
       case h :: Nil => h
       case _ :: tail => last(tail)
-      case _ => throw new NoSuchElementException
+      case Nil => throw new NoSuchElementException
     }
 
 }
@@ -388,6 +388,8 @@ object P21 {
     splitResult._1 ::: element :: splitResult._2
   }
 }
+
+import scala.language.postfixOps
 
 object P22 {
   /*
