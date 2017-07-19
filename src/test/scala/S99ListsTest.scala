@@ -151,3 +151,10 @@ class S99P07Test extends S99UnitTestBase {
   }
 
 }
+
+class S99P08Test extends S99UnitTestBase {
+
+  "P08" should "eliminate consecutive elements" in {
+    P08.compress(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) should be (List('a, 'b, 'c, 'a, 'd, 'e))
+  }
+}

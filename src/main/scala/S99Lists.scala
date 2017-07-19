@@ -144,7 +144,7 @@ object P08 {
 
   */
   
-  def compressTailRec[T](aList: List[T]) : List[T] = {
+  def compress[T](aList: List[T]) : List[T] = {
 
     @tailrec def helper(accumulator: List[T], aList : List[T]) : List[T] =
       aList match {
