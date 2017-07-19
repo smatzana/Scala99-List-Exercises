@@ -157,4 +157,17 @@ class S99P08Test extends S99UnitTestBase {
   "P08" should "eliminate consecutive elements" in {
     P08.compress(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) should be (List('a, 'b, 'c, 'a, 'd, 'e))
   }
+
+  it should "leave a list without consecutive elements as is" in {
+    P08.compress(List('a, 'b, 'c, 'a, 'd, 'e)) should be (List('a, 'b, 'c, 'a, 'd, 'e))
+  }
+
+  it should "leave an empty list as is" in {
+    P08.compress(List()) should be (List())
+  }
+
+  it should "leave a Nil list as is" in {
+    P08.compress(Nil) should be (Nil)
+  }
+
 }
