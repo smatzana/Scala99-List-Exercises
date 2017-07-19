@@ -33,7 +33,7 @@ object P02 {
 
 object P03 {
   /*
-    P03 (*) Find the Kth element of a list.
+    P03 (*) Find the N-th element of a list.
     By convention, the first element in the list is element 0.
     Example:
 
