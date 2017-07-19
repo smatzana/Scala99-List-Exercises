@@ -106,4 +106,48 @@ class S99P05Test extends S99UnitTestBase {
   it should "reverse a Nil list" in {
     P05.reverse(Nil) should be (Nil)
   }
+
+}
+
+class S99P06Test extends S99UnitTestBase {
+
+  "P06" should "find out whether a list is a palindrome" in {
+    P06.isPalindrome(List(1, 2, 3, 2, 1)) should be (true)
+  }
+
+  it should "detect a non palindrome" in {
+    P06.isPalindrome(List(1, 2, 2, 3, 2, 1)) should be (false)
+  }
+
+  it should "detect a palindrome in an empty List" in {
+    P06.isPalindrome(List()) should be (true)
+  }
+
+  it should "detect a palindrome in an Nil List" in {
+    P06.isPalindrome(Nil) should be (true)
+  }
+}
+
+class S99P07Test extends S99UnitTestBase {
+
+  "P07" should "flatten a nested list" in {
+    P07.flatten(List(List(1, 1), 2, List(3, List(5, 8)))) should be (List(1, 1, 2, 3, 5, 8))
+  }
+
+  it should "flatten a very deeply nested list" in {
+    P07.flatten(List(List(1, List(List(List(4, List(1, 3)), List(10, 9)), 2, List(3, List(5, 8)))))) should be (List(1, 4, 1, 3, 10, 9, 2, 3, 5, 8))
+  }
+
+  it should "leave a flat list as is" in {
+    P07.flatten(List(1, 2, 2, 3, 2, 1)) should be (List(1, 2, 2, 3, 2, 1))
+  }
+
+  it should "leave an empty list as is" in {
+    P07.flatten(List()) should be (List())
+  }
+
+  it should "leave a Nil list as is" in {
+    P07.flatten(Nil) should be (Nil)
+  }
+
 }
