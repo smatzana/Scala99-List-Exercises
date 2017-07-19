@@ -170,7 +170,7 @@ object P09 {
    */
 
   def pack[T](aList: List[T]) : List[List[T]] =
-    aList.foldRight(List[List[T]](List())){
+    aList.foldRight(List[List[T]](Nil)){
       (t, acc) =>
         acc.head match {
           case h :: _ if h == t => (t :: acc.head) :: acc.tail
@@ -566,66 +566,5 @@ object P28 {
     val lengthsMap = P10.encode(lists.map( _.length).sortWith( (a,b) => a< b)).map( t => (t._2, t._1)).toMap
     lists.sortWith( (l1, l2) => lengthsMap(l1.length) < lengthsMap(l2.length))
   }
-
-}
-object S99 extends App {
-
-  /*val aList = List(1, 1, 2, 3, 5, 8)
-  println(s"P01 Last element : ${P01.last(aList)}")
-
-  println(s"P02 Penultimate element : ${P02.penultimate(aList)}")
-
-  println(s"P03 nth element (first) : ${P03.nth(0, aList)}")
-  println(s"P03 nth element (third) : ${P03.nth(2, aList)}")
-  println(s"P03 nth element (last) : ${P03.nth(aList.length - 1, aList)}")
-
-  println(s"P04 length of list : ${P04.length(aList)}")
-  println(s"P04 length of empty list : ${P04.length(List())}")
-  println(s"P04 length of Nil list : ${P04.length(Nil)}")
-
-  println(s"P05 reverse a list : ${P05.reverse(aList)}")
-
-  println(s"P06 is list a palindrome: ${P06.isPalindrome(List(1, 2, 3, 2, 1))}")
-
-  println(s"P07 flatten nested list: ${P07.flatten(List(List(1, 1), 2, List(3, List(5, 8))))}")
-  println(s"P07 flatten nested list: ${P07.flattenWithFlatMap(List(List(1, 1), 2, List(3, List(5, 8))))}")
-
-  println(s"P08 compress elements : ${P08.compressTailRec(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))}")
-
-  println(s"P09 pack elements : ${P09.pack(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))}")
-  println(s"P10 encode : ${P10.encode(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))}")
-  println(s"P11 encode modified : ${P11.encodeModified(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))}")
-
-
-  println(s"P12 decode : ${P12.decode(List((4, 'a), (1, 'b), (2, 'c), (2, 'a), (1, 'd), (4, 'e)))}")
-
-  println(s"P13 encodeDirect: ${P13.encodeDirect(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))}")
-
-  println(s"P14 duplicate elements : ${P14.duplicate(List('a, 'b, 'c, 'c, 'd))}")
-  println(s"P15 duplicateN elements : ${P15.duplicateN(3, List('a, 'b, 'c, 'c, 'd))}")
-
-  println(s"P16 drop Nth element: ${P16.drop(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k))}")
-
-  println(s"P17 split : ${P17.split(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k))}")
-  println(s"P18 slice : ${P18.slice(3, 7, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k))}")
-
-  println(s"P19 split list at 3 : ${P19.rotate(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k))}")
-  println(s"P19 split list at -2 : ${P19.rotate(-2, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k))}")
-
-  println(s"P20 remove at 1 : ${P20.removeAt(1, List('a, 'b, 'c, 'd))}")
-  println(s"P20 remove at -1 : ${P20.removeAt(-1, List('a, 'b, 'c, 'd))}")
-  println(s"P20 remove at 25 : ${P20.removeAt(25, List('a, 'b, 'c, 'd))}")
-  println(s"P21 insertAt 1 : ${P21.insertAt('new, 1, List('a, 'b, 'c, 'd))}")
-  println(s"P22 Int range : ${P22.range(4,9)}")
-  println(s"P23 random select : ${P23.randomSelect(3, List('a, 'b, 'c, 'd, 'f, 'g, 'h))}")
-  println(s"P24 lotto : ${P24.lotto(6, 49)}")
-  println(s"P25 random permute ${P25.randomPermute(List('a, 'b, 'c, 'd, 'e, 'f))}")
-
-  println(s"P26 combinations ${P26.combinations(3, List('a, 'b, 'c, 'd, 'e, 'f)).length}")
-  println(s"P27 combinations of 2,3,4 ${P27.group3(List("Aldo", "Beat", "Carla", "David", "Evi", "Flip", "Gary", "Hugo", "Ida"))}")
-  println(s"P27 generic combinations of 2,2,5 ${P27.group(List(2,2,5), List("Aldo", "Beat", "Carla", "David", "Evi", "Flip", "Gary", "Hugo", "Ida"))}")
-  */
-
-  println(s"Sort lists by length ${P28.lsort(List(List('a, 'b, 'c), List('d, 'e), List('f, 'g, 'h), List('d, 'e), List('i, 'j, 'k, 'l), List('m, 'n), List('o)))}")
 
 }

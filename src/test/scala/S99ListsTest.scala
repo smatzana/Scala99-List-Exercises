@@ -171,3 +171,18 @@ class S99P08Test extends S99UnitTestBase {
   }
 
 }
+
+class S99P09Test extends S99UnitTestBase {
+
+  "P09" should "pack consecutive duplicates of list elements into sub-lists" in {
+    P09.pack(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) should be (List(List('a, 'a, 'a, 'a), List('b), List('c, 'c), List('a, 'a), List('d), List('e, 'e, 'e, 'e)))
+  }
+
+  it should "pack an empty list as is" in {
+    P09.pack(List()) should be (List(List()))
+  }
+
+  it should "leave a Nil list as is" in {
+    P09.pack(Nil) should be (List(Nil))
+  }
+}
