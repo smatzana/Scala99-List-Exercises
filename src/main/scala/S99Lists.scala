@@ -170,14 +170,15 @@ object P09 {
    */
 
   def pack[T](aList: List[T]) : List[List[T]] =
-    aList.foldRight(List[List[T]](Nil)){
+    aList.foldRight(List.empty[List[T]]) {
       (t, acc) =>
-        acc.head match {
-          case h :: _ if h == t => (t :: acc.head) :: acc.tail
+        acc match {
+          case h :: tail if h.head == t => (t :: h) :: tail
+          case h :: Nil  if h.head == t => List(t) :: Nil
           case _ :: _ => List(t) :: acc
-          case Nil => List(t) :: Nil
+          case Nil => List(List(t))
         }
-  }
+    }
 }
 
 object P10 {
@@ -191,7 +192,14 @@ object P10 {
    */
 
   def encode[T](aList: List[T]) : List[(Int, T)] =
-    P09.pack(aList).map( list => (list.length, list.head))
+    P09.pack(aList).map( list =>
+      {
+        list match {
+          case h :: _ => Some(list.length, h)
+          case _ => None
+        }
+      }.get
+    )
 }
 
 object P11 {
@@ -567,4 +575,8 @@ object P28 {
     lists.sortWith( (l1, l2) => lengthsMap(l1.length) < lengthsMap(l2.length))
   }
 
+}
+
+object m extends App {
+  println(s"${P09.pack(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))}")
 }

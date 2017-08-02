@@ -179,10 +179,21 @@ class S99P09Test extends S99UnitTestBase {
   }
 
   it should "pack an empty list as is" in {
-    P09.pack(List()) should be (List(List()))
+    P09.pack(List()) should be (List())
   }
 
   it should "leave a Nil list as is" in {
-    P09.pack(Nil) should be (List(Nil))
+    P09.pack(Nil) should be (Nil)
+  }
+}
+
+class S99P10Test extends S99UnitTestBase {
+
+  "P10" should "run-encode a list" in {
+    P10.encode(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) should be (List((4,'a), (1,'b), (2,'c), (2,'a), (1,'d), (4,'e)))
+  }
+
+  it should "run-encode an empty list and leave as is" in {
+    P10.encode(List()) should be (List())
   }
 }
