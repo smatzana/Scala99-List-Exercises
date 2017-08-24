@@ -340,7 +340,7 @@ object P18 {
     res0: List[Symbol] = List('d, 'e, 'f, 'g)
    */
   def slice[T](from: Int, to: Int, aList: List[T]): List[T] =
-    P17.split(to - from, P17.split(from - 1, aList)._2)._1
+    P17.split(to - from, P17.split(from, aList)._2)._1
 
 }
 
@@ -358,8 +358,12 @@ object P19 {
    */
 
   def rotate[T](n: Int, aList: List[T]) : List[T] = {
-    val splitResult = P17.split((aList.length + n ) % aList.length, aList)
-    splitResult._2 ::: splitResult._1
+    aList match {
+      case Nil => Nil
+      case _ =>  val splitResult = P17.split((aList.length + n ) % aList.length, aList)
+        splitResult._2 ::: splitResult._1
+    }
+
   }
 }
 
@@ -380,7 +384,11 @@ object P20 {
         case (_, Nil) => throw new NoSuchElementException
       }
     }
-    helper(Nil, aList, Math.max(n, (aList.length + n) % aList.length))
+
+    aList match {
+      case Nil => throw new UnsupportedOperationException("empty list")
+      case _ => helper (Nil, aList, Math.max (n, (aList.length + n) % aList.length) )
+    }
   }
 }
 

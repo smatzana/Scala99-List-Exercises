@@ -197,3 +197,181 @@ class S99P10Test extends S99UnitTestBase {
     P10.encode(List()) should be (List())
   }
 }
+
+class S99P11Test extends S99UnitTestBase {
+
+  "P11" should "run modified encoding" in {
+    P11.encodeModified(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) should be (List((4,'a), 'b, (2,'c), (2,'a), 'd, (4,'e)))
+  }
+
+  it should "encode an empty list and leave as is" in {
+    P11.encodeModified(List()) should be (List())
+  }
+
+}
+
+class S99P12Test extends S99UnitTestBase {
+
+  "P12" should "decode a run-length encoded list" in {
+    P12.decode(List((4, 'a), (1, 'b), (2, 'c), (2, 'a), (1, 'd), (4, 'e))) should be (List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))
+  }
+
+  it should "decode a simple list" in {
+    P12.decode(List((1, 'a))) should be (List('a))
+  }
+
+  it should "decode an empty list and leave as is" in {
+    P11.encodeModified(List()) should be (List())
+  }
+
+  it should "deal with negative numbers" in {
+    P12.decode(List((-1, 'a))) should be (List())
+  }
+
+  it should "deal with zero" in {
+    P12.decode(List((0, 'a))) should be (List())
+  }
+}
+
+class S99P13Test extends S99UnitTestBase {
+
+  "P13" should "directly encode a list" in {
+    P13.encodeDirect(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) should be (List((4,'a), (1,'b), (2,'c), (2,'a), (1,'d), (4,'e)))
+  }
+
+  it should "rncode an empty list and leave as is" in {
+    P13.encodeDirect(List()) should be (List())
+  }
+}
+
+class S99P14Test extends S99UnitTestBase {
+
+  "P14" should "duplicate the elements of a list" in {
+    P14.duplicate(List('a, 'b, 'c, 'c, 'd)) should be (List('a, 'a, 'b, 'b, 'c, 'c, 'c, 'c, 'd, 'd))
+  }
+
+  it should "duplicate more" in {
+    P14.duplicate(List('a)) should be (List('a, 'a))
+  }
+
+  it should "leave an empty list empty" in {
+    P14.duplicate(List.empty) should be (List.empty)
+  }
+
+  it should "leave a Nil list empty" in {
+    P14.duplicate(Nil) should be (Nil)
+  }
+
+}
+
+class S99P15Test extends S99UnitTestBase {
+
+  "P15" should "duplicate n times" in {
+    P15.duplicateN(3, List('a, 'b, 'c, 'c, 'd)) should be(List('a, 'a, 'a, 'b, 'b, 'b, 'c, 'c, 'c, 'c, 'c, 'c, 'd, 'd, 'd))
+  }
+
+  it should "leave an empty list empty" in {
+    P15.duplicateN(5, List.empty) should be(List.empty)
+  }
+
+  it should "leave a Nil list empty" in {
+    P15.duplicateN(4, Nil) should be(Nil)
+  }
+
+  it should "ignore bad arguments" in {
+    an[UnsupportedOperationException] should be thrownBy P15.duplicateN(-1, List('a, 'b, 'c, 'c, 'd))
+  }
+}
+
+class S99P16Test extends S99UnitTestBase {
+
+  "P16" should "drop every 3rd element" in {
+    P16.drop(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) should be(List('a, 'b, 'd, 'e, 'g, 'h, 'j, 'k))
+  }
+
+  it should "leave an empty list empty" in {
+    P16.drop(5, List.empty) should be(List.empty)
+  }
+
+  it should "leave a Nil list empty" in {
+    P16.drop(4, Nil) should be(Nil)
+  }
+
+  it should "ignore bad arguments" in {
+    an[UnsupportedOperationException] should be thrownBy P16.drop(-1, List('a, 'b, 'c, 'c, 'd))
+  }
+}
+
+class S99P17Test extends S99UnitTestBase {
+
+  "P17" should "split a list in two parts" in {
+    P17.split(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) should be((List('a, 'b, 'c),List('d, 'e, 'f, 'g, 'h, 'i, 'j, 'k)))
+  }
+
+  it should "leave an empty list empty" in {
+    P17.split(5, List.empty) should be((List.empty, List.empty))
+  }
+
+  it should "leave a Nil list empty" in {
+    P17.split(4, Nil) should be((Nil, Nil))
+  }
+
+  it should "ignore bad arguments" in {
+    an[UnsupportedOperationException] should be thrownBy P17.split(-1, List('a, 'b, 'c, 'c, 'd))
+  }
+}
+
+class S99P18Test extends S99UnitTestBase {
+
+  "P18" should "extract a slice from a List" in {
+    P18.slice(3, 7, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) should be (List('d, 'e, 'f, 'g))
+  }
+
+  it should "leave an empty list empty" in {
+    P18.slice(1, 1, List.empty) should be(List.empty)
+  }
+
+  it should "leave a Nil list empty" in {
+    P18.slice(1, 1, Nil) should be(Nil)
+  }
+
+  it should "ignore bad arguments" in {
+    an[UnsupportedOperationException] should be thrownBy P18.slice(-1, 2, List('a, 'b, 'c, 'c, 'd))
+  }
+}
+
+class S99P19Test extends S99UnitTestBase {
+
+  "P19" should "rotate a list 3 places to the left" in {
+    P19.rotate(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) should be(List('d, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'a, 'b, 'c))
+  }
+
+  it should "leave an empty list empty" in {
+    P19.rotate(4, List.empty) should be(List.empty)
+  }
+
+  it should "leave a Nil list empty" in {
+    P19.rotate(11, Nil) should be(Nil)
+  }
+
+  it should "honor negative arguments" in {
+    P19.rotate(-1, List('a, 'b, 'c, 'c, 'd)) should be(List('d, 'a, 'b, 'c, 'c))
+  }
+
+}
+
+class S99P20Test extends S99UnitTestBase {
+
+  "P20" should "remove the second element of a list" in {
+    P20.removeAt(1, List('a, 'b, 'c, 'd)) should be((List('a, 'c, 'd), 'b))
+  }
+
+  "P20" should "remove the fourth element of a list" in {
+    P20.removeAt(3, List('a, 'b, 'c, 'd)) should be((List('a, 'b, 'c), 'd))
+  }
+
+  it should "refuse to split an empty list" in {
+    an[UnsupportedOperationException] should be thrownBy P20.removeAt(4, List.empty)
+  }
+
+}
